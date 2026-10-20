@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>CCP 2026 Fall: Midterm Exam</title>
+  <style>
+    @font-face {
+      font-family: "SeoulNotice";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Medium.woff2") format("woff2");
+      font-weight: 400 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "SeoulNotice";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Bold.woff2") format("woff2");
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #fff; color: #000; }
+    body {
+      font-family: "SeoulNotice", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+    .page {
+      min-height: 100vh;
+      padding: 7vh 3.5vw 4vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header { text-align: center; }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 750;
+      letter-spacing: -0.025em;
+    }
+    .exam-info {
+      margin-top: 6vh;
+      font-size: clamp(21px, 2.15vw, 31px);
+      line-height: 1.35;
+      font-variant-numeric: tabular-nums;
+    }
+    #clock {
+      margin-top: 5vh;
+      font-size: clamp(90px, 10.5vw, 150px);
+      line-height: 1;
+      font-weight: 750;
+      letter-spacing: -0.045em;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .rules {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      padding-top: 8vh;
+    }
+    .rule-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(15px, 1.55vw, 22px);
+      line-height: 1.5;
+    }
+    .rule-list li {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 12px;
+      margin: 0.45em 0;
+    }
+    .rule-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      margin-top: 0.65em;
+    }
+    @media (max-width: 700px) {
+      .page { padding: 5vh 5vw 4vh; }
+      #clock { font-size: clamp(54px, 15vw, 90px); }
+      .rules { grid-template-columns: 1fr; gap: 3vh; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>CCP 2026 Fall: Midterm Exam</h1>
+      <div class="exam-info">
+        <div>2026-10-20</div>
+        <div>14:10–15:20</div>
+      </div>
+      <div id="clock" role="timer" aria-label="Current time">--:--:--</div>
+    </header>
+
+    <section class="rules">
+      <ul class="rule-list" aria-label="Examination instructions in English">
+        <li>All electronic devices must be switched off.</li>
+        <li>Only writing materials are permitted on the desk.</li>
+        <li>All personal belongings must be placed in your bag and kept on the floor.</li>
+        <li>Leaving the examination room is permitted from 15:00 onwards.</li>
+      </ul>
+
+      <ul class="rule-list" lang="ko" aria-label="시험 안내 사항">
+        <li>모든 전자기기의 전원을 종료하세요.</li>
+        <li>책상 위에는 필기구만 둘 수 있습니다.</li>
+        <li>모든 소지품은 가방에 넣어 바닥에 두세요.</li>
+        <li>중도 퇴실은 15:00부터 가능합니다.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, "0");
+      const mm = String(now.getMinutes()).padStart(2, "0");
+      const ss = String(now.getSeconds()).padStart(2, "0");
+      const clock = document.getElementById("clock");
+      clock.textContent = hh + ":" + mm + ":" + ss;
+
+      const secondsSinceMidnight =
+        now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+
+      // 15:15:00–15:19:59: orange
+      if (secondsSinceMidnight >= 15 * 3600 + 15 * 60 &&
+          secondsSinceMidnight < 15 * 3600 + 20 * 60) {
+        clock.style.color = "#FF9500";
+      }
+      // 15:20:00 onward: red
+      else if (secondsSinceMidnight >= 15 * 3600 + 20 * 60) {
+        clock.style.color = "#FF3B30";
+      }
+      // Before 15:15:00: black
+      else {
+        clock.style.color = "#000000";
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 250);
+  </script>
+</body>
+</html>
