@@ -1,0 +1,13 @@
+{
+  "kid": "8730dc07e9a8d9e1",
+  "event": "CCP2026F Group-work activity",
+  "publicKey": {
+    "kty": "EC",
+    "x": "x_8glWEEEUEaRAmYcmLmaPM-9NEay4gfmAJAuZEdMvk",
+    "y": "xymxf0f0Dy945dT99v1ycN2dFR_jzLSwmxW-4gwC-Vk",
+    "crv": "P-256"
+  },
+  "fingerprint": "8730dc07e9a8d9e1c5f482e4ba43868e25206585a0813f26c8a1795e4127b865",
+  "startSlot": 498735,
+  "endSlot": 507495
+}
